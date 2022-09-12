@@ -259,20 +259,21 @@ free는 myperson 변수 자체를 삭제하지 않으며, 단순히 가리키는
 #include <stdlib.h>
 
 typedef struct {
-  int x;
-  int y;
-} point;
+  	int x;
+  	int y;
+	} point;
 
 int main() {
-  point * mypoint;
+  	point * mypoint;
 
-  mypoint = (point *)malloc(sizeof(point));
+  	mypoint = (point *)malloc(sizeof(point));
 
-  mypoint->x = 10;
-  mypoint->y =5 ;
-  printf("mypoint coordinates: %d, %d\n", mypoint->x, mypoint->y);
+  	mypoint->x = 10;
+  	mypoint->y =5 ;
+  	printf("mypoint coordinates: %d, %d\n", mypoint->x, mypoint->y);
 
-  free(mypoint);
-  return 0;
-}
+  	free(mypoint);
+  	return 0;
+	}
+
  
