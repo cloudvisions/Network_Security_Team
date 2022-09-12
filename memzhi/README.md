@@ -43,51 +43,51 @@ name 변수에 배열로 액세스하려고 하면 변수가 실제로 문자열
 
 스택의 다른 변수를 가리키는 배열을 만들고 싶다면 다음 코드를 작성할 수 있다.
 
-/* define a local variable a */
-int a = 1;
+	/* define a local variable a */
+	int a = 1;
 
-/* define a pointer variable, and point it to a using the & operator */
-int * pointer_to_a = &a;
+	/* define a pointer variable, and point it to a using the & operator */
+	int * pointer_to_a = &a;
 
-printf("The value a is %d\n", a);
-printf("The value of a is also %d\n", *pointer_to_a);
+	printf("The value a is %d\n", a);
+	printf("The value of a is also %d\n", *pointer_to_a);
 
 방금 만든 &변수를 가리키기 위해 연산자를 사용했다.
 
 그런 다음 역참조 연산자를 사용하여 참조했다. 역참조된 변수의 내용을 변경할 수도 있다.
 
-int a = 1;
-int * pointer_to_a = &a;
+	int a = 1;
+	int * pointer_to_a = &a;
 
-/* let's change the variable a */
-a += 1;
+	/* let's change the variable a */
+	a += 1;
 
-/* we just changed the variable again! */
-*pointer_to_a += 1;
+	/* we just changed the variable again! */
+	*pointer_to_a += 1;
 
-/* will print out 3 */
-printf("The value of a is now %d\n", a);
+	/* will print out 3 */
+	printf("The value of a is now %d\n", a);
 
 연습
 
 지역 변수 n이라고 불리는 pointer_to_n이라는 포인터 변수를 만들고 이 값을 n에서 1만큼 늘린다.
 
-#include <stdio.h>
+	#include <stdio.h>
 
-int main() {
-	int n = 10;
+	int main() {
+		int n = 10;
 
-	int * pointer_to_n = &n;
+		int * pointer_to_n = &n;
 
-	*pointer_to_n += 1;
+		*pointer_to_n += 1;
 
-	/* testing code */
-	if (pointer_to_n != &n) return 1;
-	if (*pointer_to_n ! = 11) return 1;
+		/* testing code */
+		if (pointer_to_n != &n) return 1;
+		if (*pointer_to_n ! = 11) return 1;
 
-	printf("Done!\n");
-	return 0;
-}
+		printf("Done!\n");
+		return 0;
+	}
 ***
 1.2 (2022-09-12) C언어 Advanced
 ***
@@ -100,25 +100,25 @@ C 구조체는 몇몇의 이름있는 변수들을 안에 포함하는 특수하
 
 구조의 가장 기본적인 예는 두 개의 변수(x와 y)를 포함하는 단일 엔티티인 포인터이다. 포인터를 정의해보자.
 
-struct point {
-	int x;
-	int y;
-};
+	struct point {
+		int x;
+		int y;
+	};
 
 지금, 새로운 포인터를 정의하고 사용해보자. 함수 draw가 포인터를 받아 화면에 그린다고 가정해보자. 구조체가 없으면 모든 좌표에 대해 각각 두 개의 인수가 필요하다.
 
-/* draws a point at 10, 5 */
-int x = 10;
-int y = 5;
-draw(x, y);
+	/* draws a point at 10, 5 */
+	int x = 10;
+	int y = 5;
+	draw(x, y);
 
 구조체를 사용하여 포인터 인수를 전달할 수 있다.
 
-/* draws a point at 10, 5 */
-struct point p;
-p.x = 10;
-p.y = 5;
-draw(p);
+	/* draws a point at 10, 5 */
+	struct point p;
+	p.x = 10;
+	p.y = 5;
+	draw(p);
 
 포인터 변수에 액세스하려면 점(dot) 연산자를 사용한다.
 
@@ -127,10 +127,10 @@ draw(p);
 형식정의를 사용하면 다른 이름으로 유형을 정의할 수 있다. 이는 구조체와 포인터를 다룰 때 유용할 수 있다.
 이 경우 우리는 포인터 구조체의 긴 정의를 제외하고 싶을 것이다. 다음 구문을 구조체를 사용하여 새 포인터를 정의할 때마다 키워드를 제거할 수 있다. 
 
-typedef struct {
-	int x;
-	int y;
-} point;
+	typedef struct {
+		int x;
+		int y;
+	} point;
 
 이렇게 하면 다음과 같이 새 포인터를 정의할 수 있다.
 
@@ -138,36 +138,36 @@ point p;
  
 구조체는 또한 포인터를 보유할 수 있다.(문자열을 보유할 수 있도록 하거나 다른 구조체에 대한 포인터도 보유할 수 있음). 이것이 진정한 파워이다. 예를 들어, 다음과 같은 방식으로 탈것의 구조를 정의할 수 있다.
 
-typeof struct {
-	char * brand;
-	int model;
-} vehicle;
+	typeof struct {
+		char * brand;
+		int model;
+	} vehicle;
 
 brand는 char 포인터이므로 탈것 유형에는 문자열(이 경우 차량의 브랜드를 나타냄)이 포함될 수 있다.
 
-vehicle mycar;
-mycar.brand = "Ford";
-mycar.model = 2007;
+	vehicle mycar;
+	mycar.brand = "Ford";
+	mycar.model = 2007;
 
 연습
 
 name이라는 문자열(char에 대한 포인터)과 age라는 정수를 포함하는 "person"이라는 새 데이터 구조를 정의한다.
 
-#include <stdio.h>
+	#include <stdio.h>
 
-typedef struct {
-	char * name;
-	int age;
-} person;
+	typedef struct {
+		char * name;
+		int age;
+	} person;
 
-int main () {
-	person john;
+	int main () {
+		person john;
 
-	/* testing code */
-	john.name = "John";	
-	john.age = 27;
-	printf("%s is %d years old.", john.name, john.age);
-}
+		/* testing code */
+		john.name = "John";	
+		john.age = 27;
+		printf("%s is %d years old.", john.name, john.age);
+	}
 ***
 1.3 (2022-09-12) C언어 Advanced
 ***
@@ -177,26 +177,26 @@ int main () {
 
 숫자를 1씩 증가시키는 addone이라는 함수를 작성한다고 가정해보자. 이것은 실행되지 않는다.
 
-void addone(int n) {
-	// n is local variable which only exists within the function scope
-	n++; // therefore incrementing it has no effect
-}
+	void addone(int n) {
+		// n is local variable which only exists within the function scope
+		n++; // therefore incrementing it has no effect
+	}
 
-int n;
-printf("Before: %d\n", n);
-addone(n);
-printf("After: %d\n", n);
+	int n;
+	printf("Before: %d\n", n);
+	addone(n);
+	printf("After: %d\n", n);
 
 그러나 다음과 같이 실행된다.
-void addone(int *n) {
-	// n is a pointer here which point to a memory-address outside the function scope (*n)++; 
-	// this will effecctively increment the value of n
-}
+	void addone(int *n) {
+		// n is a pointer here which point to a memory-address outside the function scope (*n)++; 
+		// this will effecctively increment the value of n
+	}
 
-int n;
-printf("Before: %d\n", n);
-addone(&n);
-printf("After: %d\n", n);
+	int n;
+	printf("Before: %d\n", n);
+	addone(&n);
+	printf("After: %d\n", n);
 
 addone의 두번째 버전의 차이점은 변수에 대한 포인터를 n인수로 받은 다음 메모리의 위치를 알고 있기 때문에 이를 조작할 수 있다는 것이다. 
 addone 함수를 호출할 때 변수 자체가 아니라 변수 n에 대한 참조를 전달해야 한다. 이는 함수가 변수의 주소를 알고 변수 자의 복사본을 받지 않도록 하기 위한 것이다.
@@ -204,17 +204,17 @@ addone 함수를 호출할 때 변수 자체가 아니라 변수 n에 대한 참
 구조체에 대한 포인터
 x와 y 방향으로 점을 전진시키는 함수를 만든다고 하자. 두 개의 포인터를 보내는 대신, 이제 포인터 구조의 함수로 하나의 포인터만 보낼 수 있다. 
 
-void move(point * p) {
-	(*p).x++;
-	(*p).y++;
-}
+	void move(point * p) {
+		(*p).x++;
+		(*p).y++;
+	}
 
 그러나 구조를 역참조하고 내부 구성요소 중 하나에 액세스하려는 경우, 데이터 구조에서 이 연산이 널리 사용되기 떄문에 그에 대한 간략한 구문이 있다. 다음 구문을 사용하여 이 함수를 다시 작성할 수 있다. 
 
-void move(point * p) {
-	p->x++;
-	p->y++;
-}
+	void move(point * p) {
+		p->x++;
+		p->y++;
+	}
 
 ***
 1.4 (2022-09-12) C언어 Advanced
@@ -227,14 +227,14 @@ void move(point * p) {
 
 person 구조를 동적으로 할당한다고 가정해 보자. person은 다음과 같이 정의된다.
 
-typedef struct {
-	char * name;
-	int age;
-} person;
+	typedef struct {
+		char * name;
+		int age;
+	} person;
 
 myperson 인수에 새 사용자를 할당하려면 다음 구문을 사용한다. 
 
-person * myperson = (person *) malloc(sizeof(person));
+	person * myperson = (person *) malloc(sizeof(person));
 
 이것은 컴파일러에게 우리가 사람 구조를 메모리에 보유할 수 있을 만큼만 동적으로 할당하고 나서 새로 할당된 데이터 유형으로 person 포인터를 반환하기를 원한다는 것을 알려준다. 메모리 할당 함수 malloc()는 지정된 메모리 공간을 예약한다. 이 경우 이 크기는 사용자 크기(바이트)이다. 
 
@@ -243,8 +243,8 @@ person * myperson = (person *) malloc(sizeof(person));
 "sizeof"는 실제 함수가 아니다. 그 이유는 컴파일러가 이를 해석하고 사용자 구조의 실제 메모리 크기로 변환하기 때문이다. 
 사용자 구성원에 접근하기 위해 -> 표기법을 사용할 수 있다. 
 
-myperson->name = "John";
-myperson->age = 27;
+	myperson->name = "John";
+	myperson->age = 27;
 
 동적으로 할당된 구조를 사용한 후, 다음과 같이 free로 해제할 수 있다.
 
@@ -255,25 +255,25 @@ free는 myperson 변수 자체를 삭제하지 않으며, 단순히 가리키는
 연습하기
 
 
-#include <stdio.h>
-#include <stdlib.h>
+	#include <stdio.h>
+	#include <stdlib.h>
 
-typedef struct {
-  	int x;
-  	int y;
-	} point;
+	typedef struct {
+		int x;
+		int y;
+		} point;
 
-int main() {
-  	point * mypoint;
+	int main() {
+		point * mypoint;
 
-  	mypoint = (point *)malloc(sizeof(point));
+		mypoint = (point *)malloc(sizeof(point));
 
-  	mypoint->x = 10;
-  	mypoint->y =5 ;
-  	printf("mypoint coordinates: %d, %d\n", mypoint->x, mypoint->y);
+		mypoint->x = 10;
+		mypoint->y =5 ;
+		printf("mypoint coordinates: %d, %d\n", mypoint->x, mypoint->y);
 
-  	free(mypoint);
-  	return 0;
-	}
+		free(mypoint);
+		return 0;
+		}
 
  
