@@ -16,3 +16,4 @@ def test(f):   # f=add
     return f(30,40) #함수를 호출하겠다.
 
 test(add)
+

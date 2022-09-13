@@ -64,3 +64,8 @@ int main() {
     return f(30,40) #함수를 호출하겠다.
 
     test(add)
+    numbers = [ 20, 10, 5, 60, 35] #디폴트 : 오름차순
+    numbers.sort
+    print(numbers)
+
+    number.sort(reverse=True) #키워드 인자 호출
